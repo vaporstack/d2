@@ -1,8 +1,8 @@
 from discord.client import Client
 
-
-from duncan import Duncan
-
+import duncan
+#from duncan import Duncan
+from importlib import reload
 import asyncio
 import json
 import os
@@ -26,15 +26,6 @@ key = creds['secret']
 
 client = Client()
 
-def greet(person):
-	return "Hello, %s" % person
-
-def grab(grabbee):
-	return "Unfortunately .grab is not implemented yet. (workin on it)"
-
-
-d = Duncan()
-
 @client.event
 async def on_ready():
 	print('Logged in as')
@@ -48,8 +39,12 @@ async def on_member_join(member):
 	fmt = 'Welcome {0.mention} to {1.name}!'
 	await client.send_message(server, fmt.format(member, server))
 
+
 @client.event
 async def on_message(message):
+	reload(duncan)
+	d = duncan.Duncan()
+
 	if message.author == client.user:
 		return
 
@@ -63,21 +58,21 @@ async def on_message(message):
 
 	author = '{0.author.mention}'.format(message)
 	channel = message.channel
-	#commands = [greet, grab]
+
 	cmds = d._list()
 
 	if command not in cmds:
 		await client.send_message(message.channel, '[%s] is not in my functions' % command)
-	print(cmds)
+
 	method_to_call = getattr(d, command)
 
-	#if command == "list":
-	#	await client.send_message(message.channel, d.list())
 
-	await client.send_message(message.channel, 'DEBUG\nsender: %s | channel :%s | command: %s | text :%s' % ( author, channel, command, text))
+	if d._debug:
+		await client.send_message(message.channel, 'DEBUG\nsender: %s | channel :%s | command: %s | text :%s' % ( author, channel, command, text))
 	result = method_to_call(author=author, channel=channel, text=text)
 	await client.send_message(channel, result)
 
+	d.stop()
 
 
 	"""
@@ -111,7 +106,7 @@ def run_bot():
 	except Exception as e:
 		print(e)
 
-	d.stop()
+	#d.stop()
 
 if __name__ == "__main__":
 	run_bot()

@@ -9,4 +9,5 @@ source bin/activate
 
 pip install discord.py
 
-python bot.py
+python runner.py
+
