@@ -4,6 +4,13 @@
 ## setup
 
 ```
+#	a hastily constructed supybot replacement that is in no way
+#	as capable of supybot
+
+#	install
+
+# clone and cd obv
+
 virtualenv -p python3 .
 
 source bin/activate
