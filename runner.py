@@ -50,7 +50,7 @@ async def on_message(message):
 		return
 
 
-	if not message.content..lstrip().startswith('.'):
+	if not message.content.lstrip().startswith('.'):
 		return
 
 	text = message.content[1:]

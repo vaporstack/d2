@@ -6,6 +6,8 @@ import datetime
 def iso():
 	return datetime.datetime.now().isoformat()
 
+def str2bool(v):
+  return (v.lower() in ("yes", "true", "t", "1"))
 
 class Duncan(object):
 	def __init__(self):
@@ -15,18 +17,20 @@ class Duncan(object):
 			os.makedirs(ddir)
 		dfile = "data/data.json"
 		self._prefix = "."
-		#data = {}
+
 		if os.path.exists(dfile):
 			with open(dfile) as f:
 				data = json.loads(f.read())
 		else:
 			print("file does not exist")
 			data = {}
-		self._debug = True
 
+		if 'debug' in data:
+			self._debug = data['debug']
+		#self._debug = True
 		self.data = data
 		self.dfile = dfile
-		# print(self.data)
+
 
 	def debug(self, author, channel, text):
 		self._debug = not self._debug
@@ -42,6 +46,9 @@ class Duncan(object):
 		return random.choice(self.data['quotes']['dune'])
 
 	def decide(self, author, channel, text):
+		if text.strip() == '':
+			return "you didn't give me any options"
+
 		ch = text.split(",")
 		ch = [x.strip() for x in ch]
 		return random.choice(ch)
@@ -78,8 +85,6 @@ class Duncan(object):
 
 	def joke(self, author, channel, text):
 		return self._common_list(author, channel, text, "joke", "can't tell you a joke, I don't know any jokes.\n(use `%sjoke <some type of humor> to add one" % self._prefix)
-
-
 
 
 	def _list(self):
