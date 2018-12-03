@@ -48,7 +48,7 @@ class Duncan(object):
 
 
 	def last(self, author, channel, text):
-		pass
+		return "UNIMPLEMENTED TRAP"
 
 	def fixme(self, author, channel, text):
 		return "https://github.com/vaporstack/d2"

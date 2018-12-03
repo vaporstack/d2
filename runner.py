@@ -45,10 +45,12 @@ async def on_message(message):
 	reload(duncan)
 	d = duncan.Duncan()
 
+	#	IGNORE ME
 	if message.author == client.user:
 		return
 
-	if not message.content.startswith('.'):
+
+	if not message.content..lstrip().startswith('.'):
 		return
 
 	text = message.content[1:]
