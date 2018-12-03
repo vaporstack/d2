@@ -1,0 +1,10 @@
+.DS_Store
+.Python
+bin
+data
+credentials.json
+discord
+include
+lib
+pip-selfcheck.json
+*.sublime-workspace
