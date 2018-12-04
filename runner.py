@@ -71,9 +71,12 @@ async def on_message(message):
 
 	if d._debug:
 		await client.send_message(message.channel, 'DEBUG\nsender: %s | channel :%s | command: %s | text :%s' % ( author, channel, command, text))
-	result = method_to_call(author=author, channel=channel, text=text)
-	await client.send_message(channel, result)
+	try:
+		result = method_to_call(author=author, channel=channel, text=text)
+		await client.send_message(channel, result)
 
+	except Exception as e:
+		await client.send_message(channel, e)
 	d.stop()
 
 
