@@ -2,6 +2,7 @@ import os
 import json
 import random
 import datetime
+import shutil
 
 def iso():
 	return datetime.datetime.now().isoformat()
