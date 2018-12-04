@@ -18,12 +18,15 @@ class Duncan(object):
 		dfile = "data/data.json"
 		self._prefix = "."
 
-		if os.path.exists(dfile):
-			with open(dfile) as f:
-				data = json.loads(f.read())
-		else:
-			print("file does not exist")
-			data = {}
+
+		if not os.path.exists(dfile):
+			shutil.copy("data/data.default.json", dfile)
+
+		with open(dfile) as f:
+			data = json.loads(f.read())
+		#else:
+		#	print("file does not exist")
+		#	data = {}
 
 		self._debug = False
 		if 'debug' in data:
