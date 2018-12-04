@@ -25,6 +25,7 @@ class Duncan(object):
 			print("file does not exist")
 			data = {}
 
+		self._debug = False
 		if 'debug' in data:
 			self._debug = data['debug']
 		#self._debug = True
