@@ -36,7 +36,7 @@ async def on_ready():
 @client.event
 async def on_member_join(member):
 	server = member.server
-	fmt = 'Welcome {0.mention} to {1.name}!'
+	fmt = 'thank you, analog universe, {0.mention} has joined {1.name}!'
 	await client.send_message(server, fmt.format(member, server))
 
 
