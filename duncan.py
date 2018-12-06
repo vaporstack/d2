@@ -37,6 +37,10 @@ class Duncan(object):
 		self.dfile = dfile
 
 
+	def eightball(self, author, channel, text):
+		dat = self.data['eightball']
+		return random.choice(dat)
+
 	def debug(self, author, channel, text):
 		self._debug = not self._debug
 		return("debug: " + str(self._debug))
